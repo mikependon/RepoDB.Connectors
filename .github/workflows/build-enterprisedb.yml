@@ -1,0 +1,55 @@
+name: Build (EnterpriseDB)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Log in to the EDB container registry
+        run: echo "${{ secrets.EDB_SUBSCRIPTION_TOKEN }}" | docker login docker.enterprisedb.com --username k8s --password-stdin
+
+      - name: Start EnterpriseDB (EPAS)
+        run: docker compose up -d --build enterprisedb
+
+      - name: Wait for EnterpriseDB to be ready
+        run: |
+          for i in $(seq 1 30); do
+            if docker exec enterprisedb /usr/edb/as17/bin/pg_isready -h localhost -U enterprisedb >/dev/null 2>&1; then
+              echo "Ready after $i attempt(s)."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "EnterpriseDB did not become ready in time." >&2
+          docker logs enterprisedb
+          exit 1
+
+      - name: Restore
+        run: dotnet restore src/RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb.slnx
+
+      - name: Build
+        run: dotnet build src/RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb.slnx --no-restore
+
+      - name: Test
+        env:
+          REPODB_ENTERPRISEDB_CONSTR_SYSTEM: "Host=127.0.0.1;Port=5433;Database=postgres;Username=enterprisedb;Password=RepoDB2026;"
+          REPODB_ENTERPRISEDB_CONSTR: "Host=127.0.0.1;Port=5433;Database=RepoDb.Connector.EnterpriseDb;Username=enterprisedb;Password=RepoDB2026;"
+        run: dotnet test src/RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb.slnx --no-build --output Detailed --max-parallel-test-modules 1
+
+      - name: Tear down EnterpriseDB
+        if: always()
+        run: docker compose down enterprisedb

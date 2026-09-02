@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>RepoDb.Connector.EnterpriseDb</Title>
+    <AssemblyName>RepoDb.Connector.EnterpriseDb</AssemblyName>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <Description>A connector for EnterpriseDB used by RepoDB. This uses the Npgsql library underneath.</Description>
+    <Authors>mike_pendon</Authors>
+    <LangVersion>preview</LangVersion>
+    <Nullable>annotations</Nullable>
+    <PackageTags>enterprisedb postgresql ado.net data provider database</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/mikependon/RepoDB.Connectors</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mikependon/RepoDB.Connectors</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="\" />
+    <None Include="../../../icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

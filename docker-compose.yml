@@ -1,4 +1,4 @@
-name: mariadb
+name: repodbconnectors
 version: '3.8'
 
 services:
@@ -11,9 +11,23 @@ services:
     networks:
       - mariadb
     environment:
-      MARIADB_ROOT_PASSWORD: MariaDB2026
+      MARIADB_ROOT_PASSWORD: RepoDB2026
     command: --local-infile=1
+
+  enterprisedb:
+    container_name: enterprisedb
+    build:
+      context: ./src/RepoDb.Connector.EnterpriseDb/Docker
+    ports:
+      - 127.0.0.1:5433:5444
+    networks:
+      - enterprisedb
+    environment:
+      EDB_SUPERUSER: enterprisedb
+      EDB_SUPERUSER_PASSWORD: RepoDB2026
 
 networks:
   mariadb:
+    driver: bridge
+  enterprisedb:
     driver: bridge
