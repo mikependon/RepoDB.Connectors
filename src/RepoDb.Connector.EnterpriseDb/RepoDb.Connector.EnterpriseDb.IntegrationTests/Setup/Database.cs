@@ -37,11 +37,11 @@ namespace RepoDb.Connector.EnterpriseDb.IntegrationTests.Setup
         {
             ConnectionStringForSystem =
                 Environment.GetEnvironmentVariable("REPODB_ENTERPRISEDB_CONSTR_SYSTEM") ??
-                "Host=127.0.0.1;Port=5433;Database=postgres;Username=postgres;Password=RepoDB2026;";
+                "Host=127.0.0.1;Port=5433;Database=postgres;Username=enterprisedb;Password=RepoDB2026;";
 
             ConnectionString =
                 Environment.GetEnvironmentVariable("REPODB_ENTERPRISEDB_CONSTR") ??
-                "Host=127.0.0.1;Port=5433;Database=RepoDb.Connector.EnterpriseDb;Username=postgres;Password=RepoDB2026;";
+                "Host=127.0.0.1;Port=5433;Database=RepoDb.Connector.EnterpriseDb;Username=enterprisedb;Password=RepoDB2026;";
 
             // Create the database first
             CreateDatabase();

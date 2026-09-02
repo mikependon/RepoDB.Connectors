@@ -1,0 +1,21 @@
+name: Build (EnterpriseDB)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test
+    uses: ./.github/workflows/build-base.yml
+    with:
+      solution-path: src/RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb.slnx
+      service-image: postgres:latest
+      service-port-mapping: "5433:5432"
+      service-health-cmd: "pg_isready -U postgres"
+      service-env: '{"POSTGRES_USER":"postgres","POSTGRES_PASSWORD":"RepoDB2026"}'
+      env-vars: '{"REPODB_ENTERPRISEDB_CONSTR_SYSTEM":"Host=127.0.0.1;Port=5433;Database=postgres;Username=postgres;Password=RepoDB2026;","REPODB_ENTERPRISEDB_CONSTR":"Host=127.0.0.1;Port=5433;Database=RepoDb.Connector.EnterpriseDb;Username=postgres;Password=RepoDB2026;"}'
+    secrets: inherit
