@@ -12,6 +12,8 @@
 
 The project aims to provide a dedicated EnterpriseDB connector based on the standard `System.Data.Common` abstractions, while exposing PostgreSQL/EnterpriseDB-specific data types, behaviors, and capabilities where applicable. All objects follow the `EDB`-prefixed naming convention used by EnterpriseDB's own [EnterpriseDB.EDBClient](https://www.nuget.org/packages/EnterpriseDB.EDBClient) driver, so that code written against this connector reads the same way it would against the official client.
 
+> The prefixes of **EDB** to the objects are intentional for API compatibility, so users can switch to the official EnterpriseDB nuget package with less restrictions and less code modifications.
+
 It implements the `Async` equivalent of the [Npgsql](https://www.nuget.org/packages/Npgsql) library that is dedicated for EnterpriseDB/PostgreSQL. It also covers the full implementation of Bulk operations using Npgsql's binary `COPY` protocol (`NpgsqlBinaryImporter`).
 
 > **Status:** Early development. The API and implementation are subject to change.
