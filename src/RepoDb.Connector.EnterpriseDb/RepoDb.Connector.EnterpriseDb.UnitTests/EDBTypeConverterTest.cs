@@ -66,6 +66,32 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
         }
 
         [TestMethod]
+        public void TestEDBTypeConverterToEDBTypeForJsonPath()
+        {
+            // Setup
+            var input = NpgsqlDbType.JsonPath;
+
+            // Act
+            var output = EDBTypeConverter.ToEDBType(input);
+
+            // Assert
+            Assert.AreEqual(EDBType.JsonPath, output);
+        }
+
+        [TestMethod]
+        public void TestEDBTypeConverterToNpgsqlDbTypeForNumericRange()
+        {
+            // Setup
+            var input = EDBType.NumericRange;
+
+            // Act
+            var output = EDBTypeConverter.ToNpgsqlDbType(input);
+
+            // Assert
+            Assert.AreEqual(NpgsqlDbType.NumericRange, output);
+        }
+
+        [TestMethod]
         public void TestEDBTypeConverterToEDBTypeForArrayThrowsNotSupportedException()
         {
             // Setup

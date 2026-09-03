@@ -179,6 +179,11 @@ namespace RepoDb.Connector.EnterpriseDb
         /// </summary>
         Jsonb,
 
+        /// <summary>
+        /// A path expression for querying JSON. Corresponds to the PostgreSQL JSONPATH type.
+        /// </summary>
+        JsonPath,
+
         #endregion
 
         #region Other
@@ -250,6 +255,40 @@ namespace RepoDb.Connector.EnterpriseDb
         /// A circle defined by a center point and a radius. Corresponds to the PostgreSQL CIRCLE type.
         /// </summary>
         Circle,
+
+        #endregion
+
+        #region Range
+
+        /// <summary>
+        /// A range of integer values. Corresponds to the PostgreSQL INT4RANGE type.
+        /// </summary>
+        IntegerRange,
+
+        /// <summary>
+        /// A range of bigint values. Corresponds to the PostgreSQL INT8RANGE type.
+        /// </summary>
+        BigIntRange,
+
+        /// <summary>
+        /// A range of numeric values. Corresponds to the PostgreSQL NUMRANGE type.
+        /// </summary>
+        NumericRange,
+
+        /// <summary>
+        /// A range of dates. Corresponds to the PostgreSQL DATERANGE type.
+        /// </summary>
+        DateRange,
+
+        /// <summary>
+        /// A range of timestamps without a time zone. Corresponds to the PostgreSQL TSRANGE type.
+        /// </summary>
+        TimestampRange,
+
+        /// <summary>
+        /// A range of timestamps with a time zone. Corresponds to the PostgreSQL TSTZRANGE type.
+        /// </summary>
+        TimestampTzRange,
 
         #endregion
     }

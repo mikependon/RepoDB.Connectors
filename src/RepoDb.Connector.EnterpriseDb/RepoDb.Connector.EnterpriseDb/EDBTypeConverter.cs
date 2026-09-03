@@ -85,6 +85,8 @@ namespace RepoDb.Connector.EnterpriseDb
                     return EDBType.Json;
                 case NpgsqlDbType.Jsonb:
                     return EDBType.Jsonb;
+                case NpgsqlDbType.JsonPath:
+                    return EDBType.JsonPath;
                 case NpgsqlDbType.Uuid:
                     return EDBType.Uuid;
                 case NpgsqlDbType.Xml:
@@ -109,6 +111,18 @@ namespace RepoDb.Connector.EnterpriseDb
                     return EDBType.Polygon;
                 case NpgsqlDbType.Circle:
                     return EDBType.Circle;
+                case NpgsqlDbType.IntegerRange:
+                    return EDBType.IntegerRange;
+                case NpgsqlDbType.BigIntRange:
+                    return EDBType.BigIntRange;
+                case NpgsqlDbType.NumericRange:
+                    return EDBType.NumericRange;
+                case NpgsqlDbType.DateRange:
+                    return EDBType.DateRange;
+                case NpgsqlDbType.TimestampRange:
+                    return EDBType.TimestampRange;
+                case NpgsqlDbType.TimestampTzRange:
+                    return EDBType.TimestampTzRange;
                 default:
                     throw new NotSupportedException($"The NpgsqlDbType '{npgsqlDbType}' has no corresponding EDBType.");
             }
@@ -181,6 +195,8 @@ namespace RepoDb.Connector.EnterpriseDb
                     return NpgsqlDbType.Json;
                 case EDBType.Jsonb:
                     return NpgsqlDbType.Jsonb;
+                case EDBType.JsonPath:
+                    return NpgsqlDbType.JsonPath;
                 case EDBType.Uuid:
                     return NpgsqlDbType.Uuid;
                 case EDBType.Xml:
@@ -205,6 +221,18 @@ namespace RepoDb.Connector.EnterpriseDb
                     return NpgsqlDbType.Polygon;
                 case EDBType.Circle:
                     return NpgsqlDbType.Circle;
+                case EDBType.IntegerRange:
+                    return NpgsqlDbType.IntegerRange;
+                case EDBType.BigIntRange:
+                    return NpgsqlDbType.BigIntRange;
+                case EDBType.NumericRange:
+                    return NpgsqlDbType.NumericRange;
+                case EDBType.DateRange:
+                    return NpgsqlDbType.DateRange;
+                case EDBType.TimestampRange:
+                    return NpgsqlDbType.TimestampRange;
+                case EDBType.TimestampTzRange:
+                    return NpgsqlDbType.TimestampTzRange;
                 default:
                     throw new NotSupportedException($"The EDBType '{edbType}' has no corresponding NpgsqlDbType.");
             }
