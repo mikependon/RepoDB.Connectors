@@ -1,0 +1,35 @@
+name: Release (EnterpriseDB)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version to publish (e.g. 1.0.0)"
+        required: true
+        type: string
+  release:
+    types: [published]
+
+jobs:
+  resolve-version:
+    name: Resolve Version
+    runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.version.outputs.value }}
+    steps:
+      - name: Resolve Version
+        id: version
+        run: echo "value=${{ inputs.version || github.ref_name }}" | sed 's/=v/=/' >> $GITHUB_OUTPUT
+
+  publish:
+    name: Publish
+    needs: resolve-version
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/release-base.yml
+    with:
+      package-name: RepoDb.Connector.EnterpriseDb
+      project-path: src/RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb.csproj
+      version: ${{ needs.resolve-version.outputs.value }}
+    secrets: inherit
