@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Docker/">
+    <File Path="Docker/Dockerfile" />
+    <File Path="Docker/entrypoint.sh" />
+  </Folder>
   <Project Path="RepoDb.Connector.EnterpriseDb.IntegrationTests/RepoDb.Connector.EnterpriseDb.IntegrationTests.csproj" />
   <Project Path="RepoDb.Connector.EnterpriseDb.UnitTests/RepoDb.Connector.EnterpriseDb.UnitTests.csproj" />
   <Project Path="RepoDb.Connector.EnterpriseDb/RepoDb.Connector.EnterpriseDb.csproj" />
