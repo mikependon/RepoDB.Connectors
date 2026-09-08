@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## 0.0.1
 
-Date: 2026-09-02
+Date: 2026-09-08
 
 Initial draft release of the EnterpriseDB connector built on [Npgsql](https://www.nuget.org/packages/Npgsql). Introduces the core ADO.NET provider objects and bulk-copy support described in the [README](src/RepoDb.Connector.EnterpriseDb/README.md).
 

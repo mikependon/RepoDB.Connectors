@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## 0.0.1
 
-Date: 2026-08-18
+Date: 2026-09-08
 
 Initial draft release of the MariaDB connector. Introduces the core ADO.NET provider objects and bulk-loading support described in the [README](src/RepoDb.Connector.MariaDb/README.md).
 
