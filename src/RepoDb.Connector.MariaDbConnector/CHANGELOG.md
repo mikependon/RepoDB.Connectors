@@ -4,6 +4,15 @@ All notable changes to this connector are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this connector follows [Semantic Versioning](https://semver.org/).
 
+## 0.1.0
+
+Date: 2026-09-21
+
+#### Changed
+
+- Bumped [MySqlConnector](https://www.nuget.org/packages/MySqlConnector) from `2.6.1` to `2.6.2`, the latest version.
+- Fixed code smells reported by the Roslyn and Meziantou static code analyzers.
+
 ## 0.0.1
 
 Date: 2026-09-08
