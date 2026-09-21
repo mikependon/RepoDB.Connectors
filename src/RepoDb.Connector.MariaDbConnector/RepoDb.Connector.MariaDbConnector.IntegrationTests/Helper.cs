@@ -120,7 +120,7 @@ namespace RepoDb.Connector.MariaDbConnector.IntegrationTests
             {
                 command.CommandText = commandText;
                 var result = command.ExecuteScalar();
-                return (T)Convert.ChangeType(result, typeof(T));
+                return (T)Convert.ChangeType(result, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
             }
         }
 

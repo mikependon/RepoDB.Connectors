@@ -23,7 +23,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests
             parameter.ParameterName = "@Id";
 
             // Assert
-            Assert.AreEqual("@Id", parameter.ParameterName);
+            Assert.AreEqual("@Id", parameter.ParameterName, StringComparer.Ordinal);
         }
 
         [TestMethod]

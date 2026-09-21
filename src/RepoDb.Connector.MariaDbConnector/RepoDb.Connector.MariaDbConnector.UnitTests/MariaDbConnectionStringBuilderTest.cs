@@ -21,7 +21,7 @@ namespace RepoDb.Connector.MariaDbConnector.UnitTests
             builder.Server = "localhost";
 
             // Assert
-            Assert.AreEqual("localhost", builder.Server);
+            Assert.AreEqual("localhost", builder.Server, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace RepoDb.Connector.MariaDbConnector.UnitTests
             builder.Database = "TestDb";
 
             // Assert
-            Assert.AreEqual("TestDb", builder.Database);
+            Assert.AreEqual("TestDb", builder.Database, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace RepoDb.Connector.MariaDbConnector.UnitTests
             builder.UserId = "root";
 
             // Assert
-            Assert.AreEqual("root", builder.UserId);
+            Assert.AreEqual("root", builder.UserId, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace RepoDb.Connector.MariaDbConnector.UnitTests
             builder.Password = "password";
 
             // Assert
-            Assert.AreEqual("password", builder.Password);
+            Assert.AreEqual("password", builder.Password, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace RepoDb.Connector.MariaDbConnector.UnitTests
             var builder = new MariaDbConnectionStringBuilder(connectionString);
 
             // Assert
-            Assert.AreEqual("localhost", builder.Server);
+            Assert.AreEqual("localhost", builder.Server, StringComparer.Ordinal);
         }
     }
 }

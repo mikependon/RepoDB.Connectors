@@ -387,7 +387,7 @@ namespace RepoDb.Connector.MariaDbConnector.IntegrationTests.Operations
                 {
                     // Assert
                     Assert.AreEqual(typeof(string), reader.GetFieldType(0));
-                    Assert.AreEqual(expected, reader.GetString(0));
+                    Assert.AreEqual(expected, reader.GetString(0), StringComparer.Ordinal);
                     Assert.IsFalse(reader.IsDBNull(0));
                 }
             }
@@ -467,7 +467,7 @@ namespace RepoDb.Connector.MariaDbConnector.IntegrationTests.Operations
                         Assert.AreEqual(expectedColumnDecimal, reader.GetDecimal(reader.GetOrdinal("ColumnDecimal")));
                         Assert.AreEqual(expectedColumnFloat, reader.GetDouble(reader.GetOrdinal("ColumnFloat")));
                         Assert.AreEqual(expectedColumnInt, reader.GetInt32(reader.GetOrdinal("ColumnInt")));
-                        Assert.AreEqual(expectedColumnNVarChar, reader.GetString(reader.GetOrdinal("ColumnNVarChar")));
+                        Assert.AreEqual(expectedColumnNVarChar, reader.GetString(reader.GetOrdinal("ColumnNVarChar")), StringComparer.Ordinal);
                     }
                 }
             }

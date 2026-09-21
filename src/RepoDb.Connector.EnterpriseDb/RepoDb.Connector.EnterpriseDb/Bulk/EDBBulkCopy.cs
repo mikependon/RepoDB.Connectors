@@ -146,7 +146,7 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
                 }
             }
 
-            RowsCopied = await ExecuteAsync(ResolveSourceOrdinal, WriteRowsAsync, cancellationToken);
+            RowsCopied = await ExecuteAsync(ResolveSourceOrdinal, WriteRowsAsync, cancellationToken).ConfigureAwait(false);
             return RowsCopied;
         }
 
@@ -179,7 +179,7 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
                 }
             }
 
-            RowsCopied = await ExecuteAsync(ResolveSourceOrdinal, WriteRowsAsync, cancellationToken);
+            RowsCopied = await ExecuteAsync(ResolveSourceOrdinal, WriteRowsAsync, cancellationToken).ConfigureAwait(false);
             return RowsCopied;
         }
 
@@ -221,7 +221,7 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
                 }
             }
 
-            RowsCopied = await ExecuteAsync(ResolveSourceOrdinal, WriteRowsAsync, cancellationToken);
+            RowsCopied = await ExecuteAsync(ResolveSourceOrdinal, WriteRowsAsync, cancellationToken).ConfigureAwait(false);
             return RowsCopied;
         }
 
@@ -243,18 +243,19 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
             var wasClosed = _connection.State == ConnectionState.Closed;
             if (wasClosed)
             {
-                await _connection.OpenAsync(cancellationToken);
+                await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
             }
             try
             {
-                var columnMappings = await BuildColumnMappingsAsync(resolveSourceOrdinal, cancellationToken);
+                var columnMappings = await BuildColumnMappingsAsync(resolveSourceOrdinal, cancellationToken).ConfigureAwait(false);
 
                 var columnList = string.Join(", ", columnMappings.Select(mapping => QuoteIdentifier(mapping.DestinationColumn)));
                 var copyCommand = $"COPY {QuoteIdentifier(DestinationTableName)} ({columnList}) FROM STDIN (FORMAT BINARY)";
 
-                await using var importer = await _connection.InnerConnection.BeginBinaryImportAsync(copyCommand, cancellationToken).ConfigureAwait(false);
-
-                if (BulkCopyTimeout > 0)
+                var importer = await _connection.InnerConnection.BeginBinaryImportAsync(copyCommand, cancellationToken).ConfigureAwait(false);
+                await using (importer.ConfigureAwait(false))
+                {
+                    if (BulkCopyTimeout > 0)
                 {
                     importer.Timeout = TimeSpan.FromSeconds(BulkCopyTimeout);
                 }
@@ -262,6 +263,7 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
                 await writeRowsAsync(columnMappings, importer, cancellationToken).ConfigureAwait(false);
 
                 return (int)await importer.CompleteAsync(cancellationToken).ConfigureAwait(false);
+                }
             }
             finally
             {
@@ -310,7 +312,7 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
                 var destinationColumn = mapping.DestinationColumn;
                 if (string.IsNullOrEmpty(destinationColumn))
                 {
-                    destinationColumns ??= await GetDestinationColumnNamesAsync(cancellationToken);
+                    destinationColumns ??= await GetDestinationColumnNamesAsync(cancellationToken).ConfigureAwait(false);
                     if (mapping.DestinationOrdinal < 0 || mapping.DestinationOrdinal >= destinationColumns.Count)
                     {
                         throw new IndexOutOfRangeException(
@@ -335,9 +337,9 @@ namespace RepoDb.Connector.EnterpriseDb.Bulk
             command.Parameters.AddWithValue("@tableName", UnquoteIdentifier(DestinationTableName));
 
             var columns = new List<string>();
-            using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+            using (var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
             {
-                while (await reader.ReadAsync(cancellationToken))
+                while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
                     columns.Add(reader.GetString(0));
                 }

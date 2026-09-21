@@ -52,7 +52,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests.Bulk
             loader.FieldTerminator = ",";
 
             // Assert
-            Assert.AreEqual(",", loader.FieldTerminator);
+            Assert.AreEqual(",", loader.FieldTerminator, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests.Bulk
             loader.TableName = "Customer";
 
             // Assert
-            Assert.AreEqual("Customer", loader.TableName);
+            Assert.AreEqual("Customer", loader.TableName, StringComparer.Ordinal);
         }
 
         [TestMethod]

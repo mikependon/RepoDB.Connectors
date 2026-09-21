@@ -52,7 +52,7 @@ namespace RepoDb.Connector.MariaDbConnector.UnitTests.Bulk
             bulkCopy.DestinationTableName = "Customer";
 
             // Assert
-            Assert.AreEqual("Customer", bulkCopy.DestinationTableName);
+            Assert.AreEqual("Customer", bulkCopy.DestinationTableName, StringComparer.Ordinal);
         }
 
         [TestMethod]

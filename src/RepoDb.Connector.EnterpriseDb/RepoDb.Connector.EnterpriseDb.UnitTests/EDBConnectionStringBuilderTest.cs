@@ -21,7 +21,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             builder.Host = "localhost";
 
             // Assert
-            Assert.AreEqual("localhost", builder.Host);
+            Assert.AreEqual("localhost", builder.Host, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             builder.Database = "TestDb";
 
             // Assert
-            Assert.AreEqual("TestDb", builder.Database);
+            Assert.AreEqual("TestDb", builder.Database, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             builder.Username = "postgres";
 
             // Assert
-            Assert.AreEqual("postgres", builder.Username);
+            Assert.AreEqual("postgres", builder.Username, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             builder.Password = "password";
 
             // Assert
-            Assert.AreEqual("password", builder.Password);
+            Assert.AreEqual("password", builder.Password, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             var builder = new EDBConnectionStringBuilder(connectionString);
 
             // Assert
-            Assert.AreEqual("localhost", builder.Host);
+            Assert.AreEqual("localhost", builder.Host, StringComparer.Ordinal);
         }
     }
 }

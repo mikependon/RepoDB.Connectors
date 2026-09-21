@@ -49,7 +49,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests.Bulk
             var output = mapping.DestinationColumn;
 
             // Assert
-            Assert.AreEqual("Dest", output);
+            Assert.AreEqual("Dest", output, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests.Bulk
             var output = mapping.SourceColumn;
 
             // Assert
-            Assert.AreEqual("Src", output);
+            Assert.AreEqual("Src", output, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests.Bulk
             var output = mapping.SourceColumn;
 
             // Assert
-            Assert.AreEqual("Src", output);
+            Assert.AreEqual("Src", output, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests.Bulk
             var output = mapping.DestinationColumn;
 
             // Assert
-            Assert.AreEqual("Dest", output);
+            Assert.AreEqual("Dest", output, StringComparer.Ordinal);
         }
     }
 }

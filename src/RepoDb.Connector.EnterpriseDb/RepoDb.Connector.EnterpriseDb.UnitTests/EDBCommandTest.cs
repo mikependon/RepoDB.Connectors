@@ -23,7 +23,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             var output = command.CommandText;
 
             // Assert
-            Assert.AreEqual("SELECT 1", output);
+            Assert.AreEqual("SELECT 1", output, StringComparer.Ordinal);
         }
 
         [TestMethod]

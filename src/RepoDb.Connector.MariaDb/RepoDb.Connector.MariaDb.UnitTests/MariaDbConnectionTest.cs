@@ -25,7 +25,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests
             var output = connection.DataSource;
 
             // Assert
-            Assert.AreEqual("localhost", output);
+            Assert.AreEqual("localhost", output, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests
             var output = connection.Database;
 
             // Assert
-            Assert.AreEqual("TestDb", output);
+            Assert.AreEqual("TestDb", output, StringComparer.Ordinal);
         }
 
         [TestMethod]

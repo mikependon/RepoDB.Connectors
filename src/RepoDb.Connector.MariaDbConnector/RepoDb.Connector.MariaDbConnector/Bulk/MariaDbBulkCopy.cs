@@ -133,7 +133,7 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
             RowsCopied = await ExecuteAsync(
                 ResolveSourceOrdinal,
                 bulkCopy => bulkCopy.WriteToServerAsync(reader, cancellationToken),
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             return RowsCopied;
         }
 
@@ -161,7 +161,7 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
             RowsCopied = await ExecuteAsync(
                 ResolveSourceOrdinal,
                 bulkCopy => bulkCopy.WriteToServerAsync(table, cancellationToken),
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             return RowsCopied;
         }
 
@@ -200,7 +200,7 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
             RowsCopied = await ExecuteAsync(
                 ResolveSourceOrdinal,
                 bulkCopy => bulkCopy.WriteToServerAsync(rows, columnCount, cancellationToken),
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             return RowsCopied;
         }
 
@@ -221,11 +221,11 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
             var wasClosed = _connection.State == ConnectionState.Closed;
             if (wasClosed)
             {
-                await _connection.OpenAsync(cancellationToken);
+                await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
             }
             try
             {
-                var columnMappings = await BuildColumnMappingsAsync(resolveSourceOrdinal, cancellationToken);
+                var columnMappings = await BuildColumnMappingsAsync(resolveSourceOrdinal, cancellationToken).ConfigureAwait(false);
 
                 var bulkCopy = new MySqlBulkCopy(_connection.InnerConnection, null)
                 {
@@ -234,7 +234,7 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
                 };
                 bulkCopy.ColumnMappings.AddRange(columnMappings);
 
-                var result = await writeAsync(bulkCopy);
+                var result = await writeAsync(bulkCopy).ConfigureAwait(false);
                 return result.RowsInserted;
             }
             finally
@@ -266,7 +266,7 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
                 var destinationColumn = mapping.DestinationColumn;
                 if (string.IsNullOrEmpty(destinationColumn))
                 {
-                    destinationColumns ??= await GetDestinationColumnNamesAsync(cancellationToken);
+                    destinationColumns ??= await GetDestinationColumnNamesAsync(cancellationToken).ConfigureAwait(false);
                     if (mapping.DestinationOrdinal < 0 || mapping.DestinationOrdinal >= destinationColumns.Count)
                     {
                         throw new IndexOutOfRangeException(
@@ -294,9 +294,9 @@ namespace RepoDb.Connector.MariaDbConnector.Bulk
             command.CommandText = $"SHOW COLUMNS FROM {QuoteIdentifier(DestinationTableName?.Trim('`'))};";
 
             var columns = new List<string>();
-            using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+            using (var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
             {
-                while (await reader.ReadAsync(cancellationToken))
+                while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
                     columns.Add(reader.GetString(0));
                 }

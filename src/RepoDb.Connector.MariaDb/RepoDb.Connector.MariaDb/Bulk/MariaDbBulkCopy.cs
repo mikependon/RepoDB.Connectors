@@ -155,7 +155,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
             IDataReader reader,
             CancellationToken cancellationToken = default)
         {
-            RowsCopied = await WriteToServerInternalAsync(reader, cancellationToken);
+            RowsCopied = await WriteToServerInternalAsync(reader, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
             DbDataReader reader,
             CancellationToken cancellationToken = default)
         {
-            RowsCopied = await WriteToServerInternalAsync(reader, cancellationToken);
+            RowsCopied = await WriteToServerInternalAsync(reader, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
         {
             var rows = new DataRow[table.Rows.Count];
             table.Rows.CopyTo(rows, 0);
-            RowsCopied = await WriteToServerInternalAsync(rows, table.Columns.Count, cancellationToken);
+            RowsCopied = await WriteToServerInternalAsync(rows, table.Columns.Count, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
             CancellationToken cancellationToken = default)
         {
             var rows = SelectRows(table, rowState);
-            RowsCopied = await WriteToServerInternalAsync(rows, table.Columns.Count, cancellationToken);
+            RowsCopied = await WriteToServerInternalAsync(rows, table.Columns.Count, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
             CancellationToken cancellationToken = default)
         {
             var columnCount = rows != null && rows.Length > 0 ? rows[0].Table.Columns.Count : 0;
-            RowsCopied = await WriteToServerInternalAsync(rows, columnCount, cancellationToken);
+            RowsCopied = await WriteToServerInternalAsync(rows, columnCount, cancellationToken).ConfigureAwait(false);
         }
 
         #endregion
@@ -248,7 +248,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
                         });
                     }
                 }
-                return await LoadAsync(filePath, cancellationToken);
+                return await LoadAsync(filePath, cancellationToken).ConfigureAwait(false);
             }
             finally
             {
@@ -288,7 +288,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
                         });
                     }
                 }
-                return await LoadAsync(filePath, cancellationToken);
+                return await LoadAsync(filePath, cancellationToken).ConfigureAwait(false);
             }
             finally
             {
@@ -382,7 +382,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
         private async Task<int> LoadAsync(string filePath,
             CancellationToken cancellationToken)
         {
-            await ResolveDestinationOrdinalMappingsAsync(cancellationToken);
+            await ResolveDestinationOrdinalMappingsAsync(cancellationToken).ConfigureAwait(false);
 
             var bulkLoader = new MariaDbBulkLoader(_connection)
             {
@@ -401,7 +401,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
             }
 
             cancellationToken.ThrowIfCancellationRequested();
-            return await bulkLoader.LoadAsync();
+            return await bulkLoader.LoadAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -426,7 +426,7 @@ namespace RepoDb.Connector.MariaDb.Bulk
                 return;
             }
 
-            var columns = await GetDestinationColumnNamesAsync(cancellationToken);
+            var columns = await GetDestinationColumnNamesAsync(cancellationToken).ConfigureAwait(false);
             foreach (MariaDbBulkColumnMapping mapping in ColumnMappings)
             {
                 if (string.IsNullOrEmpty(mapping.DestinationColumn) && mapping.DestinationOrdinal >= 0)

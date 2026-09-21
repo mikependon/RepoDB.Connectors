@@ -191,7 +191,7 @@ namespace RepoDb.Connector.EnterpriseDb.IntegrationTests.Operations
                     {
                         // Assert - first result set
                         Assert.IsTrue(await reader.ReadAsync());
-                        Assert.AreEqual("NextResultAsyncTest", reader.GetString(0));
+                        Assert.AreEqual("NextResultAsyncTest", reader.GetString(0), StringComparer.Ordinal);
 
                         // Act & Assert - move to the second result set
                         Assert.IsTrue(await reader.NextResultAsync());

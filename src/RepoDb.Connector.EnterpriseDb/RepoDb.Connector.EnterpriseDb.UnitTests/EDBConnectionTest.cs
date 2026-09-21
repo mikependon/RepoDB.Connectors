@@ -25,7 +25,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             var output = connection.DataSource;
 
             // Assert
-            Assert.AreEqual("tcp://localhost:5432", output);
+            Assert.AreEqual("tcp://localhost:5432", output, StringComparer.Ordinal);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace RepoDb.Connector.EnterpriseDb.UnitTests
             var output = connection.Database;
 
             // Assert
-            Assert.AreEqual("TestDb", output);
+            Assert.AreEqual("TestDb", output, StringComparer.Ordinal);
         }
 
         [TestMethod]

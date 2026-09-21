@@ -142,7 +142,7 @@ namespace RepoDb.Connector.MariaDb.UnitTests
             collection.CopyTo(array, 0);
 
             // Assert
-            Assert.AreEqual("@Id", array[0].ParameterName);
+            Assert.AreEqual("@Id", array[0].ParameterName, StringComparer.Ordinal);
         }
 
         [TestMethod]
