@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="RepoDb.Connector.CockroachDb.IntegrationTests/RepoDb.Connector.CockroachDb.IntegrationTests.csproj" />
+  <Project Path="RepoDb.Connector.CockroachDb.UnitTests/RepoDb.Connector.CockroachDb.UnitTests.csproj" />
+  <Project Path="RepoDb.Connector.CockroachDb/RepoDb.Connector.CockroachDb.csproj" />
+</Solution>

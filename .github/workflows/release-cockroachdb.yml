@@ -29,7 +29,7 @@ jobs:
       id-token: write
     uses: ./.github/workflows/release-base.yml
     with:
-      package-name: RepoDb.Connector.CockcroachDb
-      project-path: src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.csproj
+      package-name: RepoDb.Connector.CockroachDb
+      project-path: src/RepoDb.Connector.CockroachDb/RepoDb.Connector.CockroachDb/RepoDb.Connector.CockroachDb.csproj
       version: ${{ needs.resolve-version.outputs.value }}
     secrets: inherit

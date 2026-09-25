@@ -33,13 +33,13 @@ jobs:
           dotnet-version: "10.0.x"
 
       - name: Restore
-        run: dotnet restore src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.slnx
+        run: dotnet restore src/RepoDb.Connector.CockroachDb/RepoDb.Connector.CockroachDb.slnx
 
       - name: Build
-        run: dotnet build src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.slnx --no-restore
+        run: dotnet build src/RepoDb.Connector.CockroachDb/RepoDb.Connector.CockroachDb.slnx --no-restore
 
       - name: Test
         env:
-          REPODB_COCKCROACHDB_CONSTR_SYSTEM: "Host=127.0.0.1;Port=26257;Database=defaultdb;Username=root;SSL Mode=Disable;"
-          REPODB_COCKCROACHDB_CONSTR: "Host=127.0.0.1;Port=26257;Database=RepoDb.Connector.CockcroachDb;Username=root;SSL Mode=Disable;"
-        run: dotnet test src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.slnx --no-build --output Detailed --max-parallel-test-modules 1
+          REPODB_COCKROACHDB_CONSTR_SYSTEM: "Host=127.0.0.1;Port=26257;Database=defaultdb;Username=root;SSL Mode=Disable;"
+          REPODB_COCKROACHDB_CONSTR: "Host=127.0.0.1;Port=26257;Database=RepoDb.Connector.CockroachDb;Username=root;SSL Mode=Disable;"
+        run: dotnet test src/RepoDb.Connector.CockroachDb/RepoDb.Connector.CockroachDb.slnx --no-build --output Detailed --max-parallel-test-modules 1
