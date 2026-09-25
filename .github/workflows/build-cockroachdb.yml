@@ -1,0 +1,45 @@
+name: Build (CockroachDB)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      # CockroachDB needs an explicit `start-single-node` command, which GitHub service containers cannot pass.
+      - name: Start CockroachDB
+        run: |
+          docker run -d --name cockroachdb -p 26257:26257 cockroachdb/cockroach:latest start-single-node --insecure
+          for i in $(seq 1 30); do
+            if docker exec cockroachdb ./cockroach sql --insecure -e "SELECT 1;" > /dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs cockroachdb
+          exit 1
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.slnx
+
+      - name: Build
+        run: dotnet build src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.slnx --no-restore
+
+      - name: Test
+        env:
+          REPODB_COCKCROACHDB_CONSTR_SYSTEM: "Host=127.0.0.1;Port=26257;Database=defaultdb;Username=root;SSL Mode=Disable;"
+          REPODB_COCKCROACHDB_CONSTR: "Host=127.0.0.1;Port=26257;Database=RepoDb.Connector.CockcroachDb;Username=root;SSL Mode=Disable;"
+        run: dotnet test src/RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.slnx --no-build --output Detailed --max-parallel-test-modules 1
