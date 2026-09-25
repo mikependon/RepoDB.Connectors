@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Docker/">
+    <File Path="Docker/Dockerfile" />
+    <File Path="Docker/entrypoint.sh" />
+  </Folder>
+  <Project Path="RepoDb.Connector.CockcroachDb.IntegrationTests/RepoDb.Connector.CockcroachDb.IntegrationTests.csproj" />
+  <Project Path="RepoDb.Connector.CockcroachDb.UnitTests/RepoDb.Connector.CockcroachDb.UnitTests.csproj" />
+  <Project Path="RepoDb.Connector.CockcroachDb/RepoDb.Connector.CockcroachDb.csproj" />
+</Solution>
