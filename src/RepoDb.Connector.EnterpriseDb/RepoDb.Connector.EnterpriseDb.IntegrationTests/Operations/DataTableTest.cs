@@ -92,7 +92,7 @@ namespace RepoDb.Connector.EnterpriseDb.IntegrationTests.Operations
                 };
                 foreach (var expectedColumn in expectedColumns)
                 {
-                    Assert.Contains(expectedColumn, table.Columns);
+                    Assert.Contains(expectedColumn, table.Columns.Cast<DataColumn>().Select(column => column.ColumnName), StringComparer.Ordinal);
                 }
                 Assert.AreEqual(typeof(long), table.Columns["Id"].DataType);
                 Assert.AreEqual(typeof(int), table.Columns["ColumnInt"].DataType);
@@ -155,7 +155,7 @@ namespace RepoDb.Connector.EnterpriseDb.IntegrationTests.Operations
 
                 // Assert
                 Assert.IsEmpty(table.Rows);
-                Assert.Contains("ColumnNVarChar", table.Columns);
+                Assert.Contains("ColumnNVarChar", table.Columns.Cast<DataColumn>().Select(column => column.ColumnName), StringComparer.Ordinal);
             }
         }
 
