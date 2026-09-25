@@ -4,9 +4,17 @@ All notable changes to this connector are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this connector follows [Semantic Versioning](https://semver.org/).
 
-## 1.0.0
+## 0.0.1-alpha2
 
-Date: Unreleased
+Date: 2026-09-25
+
+#### Changed
+
+- Bumped [Meziantou.Analyzer](https://www.nuget.org/packages/Meziantou.Analyzer) from `3.0.267` to `3.0.290`, the latest version.
+
+## 0.0.1-alpha1
+
+Date: 2026-09-25
 
 Initial draft release of the CockroachDB connector built on [Npgsql](https://www.nuget.org/packages/Npgsql). Introduces the core ADO.NET provider objects and bulk-copy support described in the [README](README.md).
 
