@@ -1,0 +1,22 @@
+name: Build (AuroraDB Npgsql)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test
+    uses: ./.github/workflows/build-base.yml
+    with:
+      solution-path: src/RepoDb.Connector.AuroraDb.Npgsql/RepoDb.Connector.AuroraDb.Npgsql.slnx
+      # A plain PostgreSQL (with PostGIS, used by the spatial type tests) stands in for an Aurora PostgreSQL cluster.
+      service-image: postgis/postgis:latest
+      service-port-mapping: "5435:5432"
+      service-health-cmd: "pg_isready -U postgres"
+      service-env: '{"POSTGRES_USER":"postgres","POSTGRES_PASSWORD":"RepoDB2026"}'
+      env-vars: '{"REPODB_AURORADB_CONSTR_SYSTEM":"Host=127.0.0.1;Port=5435;Database=postgres;Username=postgres;Password=RepoDB2026;","REPODB_AURORADB_CONSTR":"Host=127.0.0.1;Port=5435;Database=RepoDb.Connector.AuroraDb.Npgsql;Username=postgres;Password=RepoDB2026;"}'
+    secrets: inherit

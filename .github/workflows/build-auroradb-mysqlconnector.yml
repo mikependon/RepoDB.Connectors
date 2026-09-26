@@ -1,0 +1,23 @@
+name: Build (AuroraDB MySqlConnector)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Test
+    uses: ./.github/workflows/build-base.yml
+    with:
+      solution-path: src/RepoDb.Connector.AuroraDb.MySqlConnector/RepoDb.Connector.AuroraDb.MySqlConnector.slnx
+      # A plain MySQL 8.0 (the engine Aurora MySQL 3 is compatible with) stands in for an Aurora MySQL cluster.
+      # `local_infile` is enabled by the integration tests' setup (SET GLOBAL), as service containers cannot pass a command.
+      service-image: mysql:8.0
+      service-port-mapping: "3308:3306"
+      service-health-cmd: "mysqladmin ping -uroot -pRepoDB2026"
+      service-env: '{"MYSQL_ROOT_PASSWORD":"RepoDB2026"}'
+      env-vars: '{"REPODB_AURORADB_MYSQL_CONSTR_SYSTEM":"Server=127.0.0.1;Port=3308;Database=sys;User ID=root;Password=RepoDB2026;","REPODB_AURORADB_MYSQL_CONSTR":"Server=127.0.0.1;Port=3308;Database=RepoDb.Connector.AuroraDb.MySqlConnector;User ID=root;Password=RepoDB2026;AllowLoadLocalInfile=True;AllowUserVariables=True;"}'
+    secrets: inherit
