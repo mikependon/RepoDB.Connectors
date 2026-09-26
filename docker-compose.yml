@@ -36,10 +36,23 @@ services:
     networks:
       - cockroachdb
 
+  auroradb:
+    container_name: auroradb
+    image: postgis/postgis:latest
+    ports:
+      - 127.0.0.1:5435:5432
+    networks:
+      - auroradb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: RepoDB2026
+
 networks:
   mariadb:
     driver: bridge
   enterprisedb:
     driver: bridge
   cockroachdb:
+    driver: bridge
+  auroradb:
     driver: bridge
