@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="RepoDb.Connector.AuroraDb.MySqlConnector.IntegrationTests/RepoDb.Connector.AuroraDb.MySqlConnector.IntegrationTests.csproj" Id="2757c6c3-4e71-4f7b-8352-4fecaea23f22" />
+  <Project Path="RepoDb.Connector.AuroraDb.MySqlConnector.UnitTests/RepoDb.Connector.AuroraDb.MySqlConnector.UnitTests.csproj" Id="1c79ed89-9887-475c-86fb-926d44d5cac8" />
+  <Project Path="RepoDb.Connector.AuroraDb.MySqlConnector/RepoDb.Connector.AuroraDb.MySqlConnector.csproj" />
+</Solution>
