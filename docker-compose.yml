@@ -3,16 +3,37 @@ version: '3.8'
 
 services:
 
-  mariadb:
-    container_name: mariadb
-    image: mariadb:latest
+  auroradb:
+    container_name: auroradb
+    image: postgis/postgis:latest
     ports:
-      - 127.0.0.1:3307:3306
+      - 127.0.0.1:5435:5432
     networks:
-      - mariadb
+      - auroradb
     environment:
-      MARIADB_ROOT_PASSWORD: RepoDB2026
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: RepoDB2026
+
+  auroradbmysql:
+    container_name: auroradbmysql
+    image: mysql:8.0
+    ports:
+      - 127.0.0.1:3308:3306
+    networks:
+      - auroradbmysql
+    environment:
+      MYSQL_ROOT_PASSWORD: RepoDB2026
     command: --local-infile=1
+
+  cockroachdb:
+    container_name: cockroachdb
+    image: cockroachdb/cockroach:latest
+    command: start-single-node --insecure --listen-addr=0.0.0.0:26257 --http-addr=0.0.0.0:8080
+    ports:
+      - 127.0.0.1:26257:26257
+      - 127.0.0.1:8081:8080
+    networks:
+      - cockroachdb
 
   enterprisedb:
     container_name: enterprisedb
@@ -26,33 +47,25 @@ services:
       EDB_SUPERUSER: enterprisedb
       EDB_SUPERUSER_PASSWORD: RepoDB2026
 
-  cockroachdb:
-    container_name: cockroachdb
-    image: cockroachdb/cockroach:latest
-    command: start-single-node --insecure --listen-addr=0.0.0.0:26257 --http-addr=0.0.0.0:8080
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
     ports:
-      - 127.0.0.1:26257:26257
-      - 127.0.0.1:8081:8080
+      - 127.0.0.1:3307:3306
     networks:
-      - cockroachdb
-
-  auroradb:
-    container_name: auroradb
-    image: postgis/postgis:latest
-    ports:
-      - 127.0.0.1:5435:5432
-    networks:
-      - auroradb
+      - mariadb
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: RepoDB2026
+      MARIADB_ROOT_PASSWORD: RepoDB2026
+    command: --local-infile=1
 
 networks:
-  mariadb:
+  auroradb:
+    driver: bridge
+  auroradbmysql:
+    driver: bridge
+  cockroachdb:
     driver: bridge
   enterprisedb:
     driver: bridge
-  cockroachdb:
-    driver: bridge
-  auroradb:
+  mariadb:
     driver: bridge
