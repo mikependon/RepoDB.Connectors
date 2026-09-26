@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="https://www.nuget.org/packages/RepoDb.Connector.AuroraDb">
+    <a href="https://www.nuget.org/packages/RepoDb.Connector.AuroraDb.Npgsql">
         <image src="logo.png" style="width:256px;" />
     </a>
     <br/>
@@ -16,7 +16,7 @@ The project aims to provide a dedicated Aurora connector based on the standard `
 
 This connector **does not implement a new wire protocol and does not replace the AWS wrapper - it leverages it**. Every `AuroraDbConnection` is backed by an `AwsWrapperConnection<NpgsqlConnection>` from the [AWS.AdvancedDotnetDataProviderWrapper.Core](https://www.nuget.org/packages/AWS.AdvancedDotnetDataProviderWrapper.Core) package, using the [AWS.AdvancedDotnetDataProviderWrapper.Dialect.Npgsql](https://www.nuget.org/packages/AWS.AdvancedDotnetDataProviderWrapper.Dialect.Npgsql) dialect (registered automatically by the connector), on top of [Npgsql](https://www.nuget.org/packages/Npgsql).
 
-That means all the capabilities implemented by the AWS wrapper are available to `RepoDb.Connector.AuroraDb` consumers, driven by the connection string:
+That means all the capabilities implemented by the AWS wrapper are available to `RepoDb.Connector.AuroraDb.Npgsql` consumers, driven by the connection string:
 
 * **Failover** - awareness of the Aurora cluster topology, with fast recovery to the newly elected primary instance.
 * **Enhanced Failure Monitoring (EFM)** - faster detection of an unhealthy database instance than a network/connection timeout.
@@ -31,7 +31,7 @@ It also works with plain RDS PostgreSQL and self-managed PostgreSQL databases.
 Application / RepoDB
         │
         ▼
-RepoDb.Connector.AuroraDb
+RepoDb.Connector.AuroraDb.Npgsql
         │   AuroraDbConnection, AuroraDbCommand, AuroraDbParameter, ...
         ▼
 AWS Advanced .NET Data Provider Wrapper (AwsWrapperConnection<NpgsqlConnection>)
@@ -53,7 +53,7 @@ This library will serve as the **official Aurora connector for RepoDB** and will
 
 ## Goals of the library
 
-RepoDb.Connector.AuroraDb aims to:
+RepoDb.Connector.AuroraDb.Npgsql aims to:
 
 * Provide a dedicated ADO.NET data provider for Amazon Aurora PostgreSQL.
 * Leverage the AWS Advanced .NET Data Provider Wrapper, preserving its capabilities rather than replacing them.
@@ -66,11 +66,11 @@ RepoDb.Connector.AuroraDb aims to:
 
 ## Core ADO.NET Objects
 
-RepoDb.Connector.AuroraDb is built around the standard abstractions provided by `System.Data.Common`.
+RepoDb.Connector.AuroraDb.Npgsql is built around the standard abstractions provided by `System.Data.Common`.
 
 The following provider-specific objects form the core of the connector:
 
-| RepoDb.Connector.AuroraDb        | ADO.NET Base Class          | Purpose                                        |
+| RepoDb.Connector.AuroraDb.Npgsql        | ADO.NET Base Class          | Purpose                                        |
 | ------------------------------------ | --------------------------- | ---------------------------------------------- |
 | `AuroraDbConnection`             | `DbConnection`              | Establishes and manages Aurora connections (backed by `AwsWrapperConnection`) |
 | `AuroraDbCommand`                | `DbCommand`                 | Executes SQL commands                          |
@@ -117,10 +117,10 @@ System.Data.Common
 
 ## Basic Usage
 
-RepoDb.Connector.AuroraDb is intended to provide the familiar ADO.NET programming model.
+RepoDb.Connector.AuroraDb.Npgsql is intended to provide the familiar ADO.NET programming model.
 
 ```csharp
-using RepoDb.Connector.AuroraDb;
+using RepoDb.Connector.AuroraDb.Npgsql;
 
 var connectionString =
     "Host=my-cluster.cluster-abc123.eu-west-1.rds.amazonaws.com;" +
@@ -271,7 +271,7 @@ var parameter = new AuroraDbParameter
 
 ## Aurora PostgreSQL Data Types
 
-RepoDb.Connector.AuroraDb provides an `AuroraDbType` enumeration in addition to the standard ADO.NET `DbType`. Aurora PostgreSQL is PostgreSQL-compatible, so it mirrors the PostgreSQL type system:
+RepoDb.Connector.AuroraDb.Npgsql provides an `AuroraDbType` enumeration in addition to the standard ADO.NET `DbType`. Aurora PostgreSQL is PostgreSQL-compatible, so it mirrors the PostgreSQL type system:
 
 | Category        | AuroraDbType                                                                                      |
 | --------------- | ------------------------------------------------------------------------------------------------- |
@@ -356,7 +356,7 @@ await connection.OpenAsync();
 
 ## Provider Factory
 
-`AuroraDbFactory` extends `DbProviderFactory` and enables provider-independent ADO.NET applications and libraries to create RepoDb.Connector.AuroraDb objects.
+`AuroraDbFactory` extends `DbProviderFactory` and enables provider-independent ADO.NET applications and libraries to create RepoDb.Connector.AuroraDb.Npgsql objects.
 
 ```csharp
 var factory = AuroraDbFactory.Instance;
@@ -369,9 +369,9 @@ connection.Open();
 
 ## Bulk Operations
 
-RepoDb.Connector.AuroraDb provides bulk-loading support under the `RepoDb.Connector.AuroraDb.Bulk` namespace, built directly on top of Npgsql's binary `COPY` protocol (`NpgsqlBinaryImporter`, opened via `NpgsqlConnection.BeginBinaryImport`), which PostgreSQL supports.
+RepoDb.Connector.AuroraDb.Npgsql provides bulk-loading support under the `RepoDb.Connector.AuroraDb.Npgsql.Bulk` namespace, built directly on top of Npgsql's binary `COPY` protocol (`NpgsqlBinaryImporter`, opened via `NpgsqlConnection.BeginBinaryImport`), which PostgreSQL supports.
 
-| RepoDb.Connector.AuroraDb.Bulk          | Purpose                                                                                                       |
+| RepoDb.Connector.AuroraDb.Npgsql.Bulk          | Purpose                                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `AuroraDbBulkCopy`                      | Efficiently bulk-loads a `DbDataReader`/`IDataReader`, `DataTable`, or `DataRow[]` into an Aurora table    |
 | `AuroraDbBulkColumnMapping`             | Defines the mapping between a source column and a destination column                                          |
@@ -408,7 +408,7 @@ Console.WriteLine(bulkCopy.RowsCopied);
 
 ## Architecture
 
-RepoDb.Connector.AuroraDb is more than a set of ADO.NET wrapper classes. The public ADO.NET API sits on top of the AWS Advanced .NET Data Provider Wrapper, which in turn sits on top of the communication and protocol infrastructure provided by Npgsql.
+RepoDb.Connector.AuroraDb.Npgsql is more than a set of ADO.NET wrapper classes. The public ADO.NET API sits on top of the AWS Advanced .NET Data Provider Wrapper, which in turn sits on top of the communication and protocol infrastructure provided by Npgsql.
 
 ```text
 Application / ORM
@@ -490,7 +490,7 @@ Subsequent development may include:
 
 ## ORM and Library Integration
 
-Although RepoDb.Connector.AuroraDb can be used directly through ADO.NET, it is designed to work naturally with libraries that operate against the standard `System.Data.Common` abstractions.
+Although RepoDb.Connector.AuroraDb.Npgsql can be used directly through ADO.NET, it is designed to work naturally with libraries that operate against the standard `System.Data.Common` abstractions.
 
 For example:
 
@@ -502,7 +502,7 @@ ADO.NET Applications
 Other DbConnection-based Libraries
           │
           ▼
-   RepoDb.Connector.AuroraDb
+   RepoDb.Connector.AuroraDb.Npgsql
           │
           ▼
 AWS Advanced .NET Data Provider Wrapper
@@ -515,7 +515,7 @@ The connector itself should remain independent of any ORM.
 
 ## Contributing
 
-RepoDb.Connector.AuroraDb is in its early stages, and contributions are welcome.
+RepoDb.Connector.AuroraDb.Npgsql is in its early stages, and contributions are welcome.
 
 Areas where contributions will be particularly valuable include:
 
@@ -537,7 +537,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the release history of this connector.
 
 ## License
 
-RepoDb.Connector.AuroraDb is an independent open-source project. Amazon Aurora and AWS are trademarks of Amazon.com, Inc. or its affiliates. This project is not affiliated with, sponsored by, or endorsed by Amazon Web Services, Inc.
+RepoDb.Connector.AuroraDb.Npgsql is an independent open-source project. Amazon Aurora and AWS are trademarks of Amazon.com, Inc. or its affiliates. This project is not affiliated with, sponsored by, or endorsed by Amazon Web Services, Inc.
 
 The [AWS Advanced .NET Data Provider Wrapper](https://github.com/aws/aws-advanced-dotnet-data-provider-wrapper) is licensed under the Apache License 2.0.
 

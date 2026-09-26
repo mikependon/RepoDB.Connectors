@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="RepoDb.Connector.AuroraDb.Npgsql.IntegrationTests/RepoDb.Connector.AuroraDb.Npgsql.IntegrationTests.csproj" />
+  <Project Path="RepoDb.Connector.AuroraDb.Npgsql.UnitTests/RepoDb.Connector.AuroraDb.Npgsql.UnitTests.csproj" />
+  <Project Path="RepoDb.Connector.AuroraDb.Npgsql/RepoDb.Connector.AuroraDb.Npgsql.csproj" />
+</Solution>

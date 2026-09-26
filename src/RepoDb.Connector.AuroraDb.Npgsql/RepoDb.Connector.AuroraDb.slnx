@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="RepoDb.Connector.AuroraDb.IntegrationTests/RepoDb.Connector.AuroraDb.IntegrationTests.csproj" />
-  <Project Path="RepoDb.Connector.AuroraDb.UnitTests/RepoDb.Connector.AuroraDb.UnitTests.csproj" />
-  <Project Path="RepoDb.Connector.AuroraDb/RepoDb.Connector.AuroraDb.csproj" />
-</Solution>

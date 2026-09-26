@@ -1,4 +1,4 @@
-# Changelog for RepoDb.Connector.AuroraDb
+# Changelog for RepoDb.Connector.AuroraDb.Npgsql
 
 All notable changes to this connector are documented in this file.
 
@@ -12,7 +12,7 @@ Initial draft release of the Amazon Aurora PostgreSQL connector, built on the [A
 
 #### Added
 
-**Core ADO.NET objects** (`RepoDb.Connector.AuroraDb` namespace), wrapping the AWS wrapper (which wraps [Npgsql](https://www.nuget.org/packages/Npgsql)) behind the standard `System.Data.Common` provider model, using the `AuroraDb`-prefixed naming convention:
+**Core ADO.NET objects** (`RepoDb.Connector.AuroraDb.Npgsql` namespace), wrapping the AWS wrapper (which wraps [Npgsql](https://www.nuget.org/packages/Npgsql)) behind the standard `System.Data.Common` provider model, using the `AuroraDb`-prefixed naming convention:
 
 - `AuroraDbConnection` — extends `DbConnection`. Backed by `AwsWrapperConnection<NpgsqlConnection>`; registers the `AWS.AdvancedDotnetDataProviderWrapper.Dialect.Npgsql` dialect automatically, so the AWS wrapper capabilities (failover, enhanced failure monitoring, read/write splitting, IAM authentication, Secrets Manager, ...) are available through the connection string. Exposes the underlying wrapper through `WrappedConnection` for advanced scenarios. Opening an already-cancelled token throws `OperationCanceledException` without attempting to connect, and beginning a transaction on a closed connection throws `InvalidOperationException`.
 - `AuroraDbCommand` — extends `DbCommand`. Delegates to the command of the wrapped AWS connection, with sync and async overloads for `ExecuteNonQuery`, `ExecuteScalar`, and `ExecuteReader`. Executing without a connection, or with a closed connection, throws `InvalidOperationException`.
@@ -25,7 +25,7 @@ Initial draft release of the Amazon Aurora PostgreSQL connector, built on the [A
 - `AuroraDbType` — enumeration of the Aurora PostgreSQL column types (numeric, `MONEY`, string, `CITEXT`, `BYTEA`, date/time, network address, bit string, `JSON`/`JSONB`/`JSONPATH`, `XML`, geometric, range, `UUID`, `OID`, `HSTORE`, `LTREE`, `TSVECTOR`/`TSQUERY`, `GEOMETRY`/`GEOGRAPHY`).
 - `AuroraDbTypeConverter` — converts between `AuroraDbType` and `NpgsqlTypes.NpgsqlDbType`. Unlike CockroachDB, `JSON` and `JSONB` are distinct types. Composite values (arrays, generic range flags) throw a `NotSupportedException`.
 
-**Bulk operations** (`RepoDb.Connector.AuroraDb.Bulk` namespace), built directly on Npgsql's binary `COPY` protocol (through the `NpgsqlConnection` unwrapped from the AWS wrapper):
+**Bulk operations** (`RepoDb.Connector.AuroraDb.Npgsql.Bulk` namespace), built directly on Npgsql's binary `COPY` protocol (through the `NpgsqlConnection` unwrapped from the AWS wrapper):
 
 - `AuroraDbBulkCopy` — bulk-loads an `IDataReader`/`DbDataReader`, `DataTable`, or `DataRow[]` into an Aurora table via `NpgsqlBinaryImporter`, with sync (`WriteToServer`) and async (`WriteToServerAsync`) overloads.
 - `AuroraDbBulkColumnMapping` / `AuroraDbBulkCopyColumnMappingCollection` — source-to-destination column mapping for `AuroraDbBulkCopy`.
