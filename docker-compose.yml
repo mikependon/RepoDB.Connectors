@@ -3,13 +3,13 @@ version: '3.8'
 
 services:
 
-  auroradb:
-    container_name: auroradb
+  auroradbnpgsql:
+    container_name: auroradbnpgsql
     image: postgis/postgis:latest
     ports:
       - 127.0.0.1:5435:5432
     networks:
-      - auroradb
+      - auroradbnpgsql
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: RepoDB2026
@@ -59,7 +59,7 @@ services:
     command: --local-infile=1
 
 networks:
-  auroradb:
+  auroradbnpgsql:
     driver: bridge
   auroradbmysql:
     driver: bridge
