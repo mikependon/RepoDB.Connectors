@@ -433,3 +433,6 @@ FodyWeavers.xsd
 
 # Markdown folder
 /Markdown/
+
+# Claude Code folder
+/.claude/

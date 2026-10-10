@@ -1,5 +1,5 @@
 ---
-name: repodb-version-bump-references
+name: repodb-connector-update-references
 description: Guides bumping NuGet package references to their latest stable versions across the RepoDB.Connectors repo (all RepoDb.Connector.* projects and their UnitTests/IntegrationTests siblings, plus the shared src/Directory.Build.props), verifying the bump with a real build, recording it in each affected connector's CHANGELOG.md following that connector's own version scheme, checking the READMEs for anything version-specific that would go stale, and writing a dated summary report into the repo's Markdown/ folder. Use this whenever the user asks to update, bump, upgrade, or refresh NuGet/package references, dependencies, or third-party libraries in this repo, asks to "check for the latest packages", or asks to add a release-notes/changelog entry for a dependency bump. Covers both single-connector bumps and repo-wide sweeps across all six connectors.
 ---
 
