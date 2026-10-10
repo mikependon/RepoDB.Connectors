@@ -284,7 +284,7 @@ namespace RepoDb.Connector.AuroraDb.Npgsql.IntegrationTests.Operations
             var (value, dataTypeName) = RoundTrip(AuroraDbType.Date, new DateOnly(2026, 9, 25));
 
             // Assert
-            Assert.AreEqual(new DateTime(2026, 9, 25), value);
+            Assert.AreEqual(new DateOnly(2026, 9, 25), value);
             Assert.AreEqual("date", dataTypeName, StringComparer.Ordinal);
         }
 
@@ -295,7 +295,7 @@ namespace RepoDb.Connector.AuroraDb.Npgsql.IntegrationTests.Operations
             var (value, dataTypeName) = RoundTrip(AuroraDbType.Time, new TimeOnly(13, 45, 30));
 
             // Assert
-            Assert.AreEqual(new TimeSpan(13, 45, 30), value);
+            Assert.AreEqual(new TimeOnly(13, 45, 30), value);
             Assert.AreEqual("time without time zone", dataTypeName, StringComparer.Ordinal);
         }
 
