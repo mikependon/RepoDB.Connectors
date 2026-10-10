@@ -118,7 +118,10 @@ silently, since README changes are user-facing documentation.
 ### 7. Write the summary report
 
 Create a dated Markdown file in the repo's `Markdown/` folder (gitignored — see
-`.gitignore`'s `/Markdown/` entry) — e.g. `Markdown/nuget-package-updates-<YYYY-MM-DD>.md`. Include:
+`.gitignore`'s `/Markdown/` entry), named `Markdown/CONNECTOR_UPDATE_REFERENCES_REPORT-<YYYY-MM-DD>.md`
+(`<YYYY-MM-DD>` is the date the bump was performed — use the same name even on a day where a second report
+would collide, but check first: if a report for today's date already exists and this is a materially
+different bump, say so to the user rather than silently overwriting it). Include:
 
 - A table of every package touched: old version → new version, and whether it was already-latest (no-op).
 - The full list of files changed.
@@ -142,4 +145,4 @@ to be reviewed before it's committed — don't stage or commit on the user's beh
 | Per-connector solution to build | `src/<Connector>/<Connector>.slnx` |
 | Release notes | `src/<Connector>/CHANGELOG.md` |
 | User-facing docs that might reference a dependency | `src/<Connector>/README.md` |
-| Where the summary report goes | `Markdown/` (repo root, gitignored) |
+| Where the summary report goes | `Markdown/CONNECTOR_UPDATE_REFERENCES_REPORT-<YYYY-MM-DD>.md` (repo root, gitignored) |
