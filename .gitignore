@@ -430,3 +430,6 @@ FodyWeavers.xsd
 
 # Fixes folder
 /Fixes/
+
+# Markdown folder
+/Markdown/

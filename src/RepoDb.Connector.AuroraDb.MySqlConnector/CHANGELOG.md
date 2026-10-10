@@ -4,6 +4,19 @@ All notable changes to this connector are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this connector follows [Semantic Versioning](https://semver.org/).
 
+## 0.0.1-alpha2
+
+Date: TBA
+
+#### Changed
+
+- Bumped [AWS.AdvancedDotnetDataProviderWrapper.Core](https://www.nuget.org/packages/AWS.AdvancedDotnetDataProviderWrapper.Core) and [AWS.AdvancedDotnetDataProviderWrapper.Dialect.MySqlConnector](https://www.nuget.org/packages/AWS.AdvancedDotnetDataProviderWrapper.Dialect.MySqlConnector) from `2.2.0` to `3.0.0`, the latest version.
+- Bumped [Meziantou.Analyzer](https://www.nuget.org/packages/Meziantou.Analyzer) from `3.0.290` to `3.0.296`, the latest version.
+- Bumped [Microsoft.Testing.Extensions.CodeCoverage](https://www.nuget.org/packages/Microsoft.Testing.Extensions.CodeCoverage) from `18.11.2` to `18.12.0`, the latest version.
+- Bumped [Microsoft.Testing.Extensions.TrxReport](https://www.nuget.org/packages/Microsoft.Testing.Extensions.TrxReport) from `2.4.1` to `2.5.1`, the latest version.
+- Bumped [MSTest.TestAdapter](https://www.nuget.org/packages/MSTest.TestAdapter) and [MSTest.TestFramework](https://www.nuget.org/packages/MSTest.TestFramework) from `4.4.1` to `4.5.1`, the latest version.
+- Bumped the `MSTest.Sdk` test project SDK from `4.0.2` to `4.5.1`, the latest version.
+
 ## 0.0.1-alpha1
 
 Date: 2026-09-26

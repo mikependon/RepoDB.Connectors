@@ -4,6 +4,18 @@ All notable changes to this connector are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this connector follows [Semantic Versioning](https://semver.org/).
 
+## 1.1.2
+
+Date: TBA
+
+#### Changed
+
+- Bumped [Meziantou.Analyzer](https://www.nuget.org/packages/Meziantou.Analyzer) from `3.0.290` to `3.0.296`, the latest version.
+- Bumped [Microsoft.Testing.Extensions.CodeCoverage](https://www.nuget.org/packages/Microsoft.Testing.Extensions.CodeCoverage) from `18.11.2` to `18.12.0`, the latest version.
+- Bumped [Microsoft.Testing.Extensions.TrxReport](https://www.nuget.org/packages/Microsoft.Testing.Extensions.TrxReport) from `2.4.1` to `2.5.1`, the latest version.
+- Bumped [MSTest.TestAdapter](https://www.nuget.org/packages/MSTest.TestAdapter) and [MSTest.TestFramework](https://www.nuget.org/packages/MSTest.TestFramework) from `4.4.1` to `4.5.1`, the latest version.
+- Bumped the `MSTest.Sdk` test project SDK from `4.0.2` to `4.5.1`, the latest version.
+
 ## 1.1.1
 
 Date: 2026-09-25

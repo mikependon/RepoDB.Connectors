@@ -16,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWS.AdvancedDotnetDataProviderWrapper.Core" Version="2.2.0" />
-    <PackageReference Include="AWS.AdvancedDotnetDataProviderWrapper.Dialect.Npgsql" Version="2.2.0" />
+    <PackageReference Include="AWS.AdvancedDotnetDataProviderWrapper.Core" Version="3.0.0" />
+    <PackageReference Include="AWS.AdvancedDotnetDataProviderWrapper.Dialect.Npgsql" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Meziantou.Analyzer" Version="3.0.290" />
+    <PackageReference Update="Meziantou.Analyzer" Version="3.0.296" />
   </ItemGroup>
 
 </Project>
