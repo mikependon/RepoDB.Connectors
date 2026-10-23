@@ -4,6 +4,15 @@ All notable changes to this connector are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this connector follows [Semantic Versioning](https://semver.org/).
 
+## 1.0.0
+
+Date: 2026-10-23
+
+#### Changed
+
+- Bumped [Meziantou.Analyzer](https://www.nuget.org/packages/Meziantou.Analyzer) from `3.0.296` to `3.0.316`, the latest version.
+- Bumped [Microsoft.CodeAnalysis.NetAnalyzers](https://www.nuget.org/packages/Microsoft.CodeAnalysis.NetAnalyzers) from `10.0.401` to `10.0.402`, the latest version.
+
 ## 0.0.1-alpha3
 
 Date: 2026-10-10

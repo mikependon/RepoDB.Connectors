@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Meziantou.Analyzer" Version="3.0.296" />
+    <PackageReference Update="Meziantou.Analyzer" Version="3.0.316" />
   </ItemGroup>
 
 </Project>

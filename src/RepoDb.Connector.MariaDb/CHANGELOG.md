@@ -4,6 +4,16 @@ All notable changes to this connector are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this connector follows [Semantic Versioning](https://semver.org/).
 
+## 1.2.0
+
+Date: 2026-10-23
+
+#### Changed
+
+- Bumped [Meziantou.Analyzer](https://www.nuget.org/packages/Meziantou.Analyzer) from `3.0.296` to `3.0.316`, the latest version.
+- Bumped [Microsoft.CodeAnalysis.NetAnalyzers](https://www.nuget.org/packages/Microsoft.CodeAnalysis.NetAnalyzers) from `10.0.401` to `10.0.402`, the latest version.
+- Bumped [MySql.Data](https://www.nuget.org/packages/MySql.Data) from `26.7.0` to `26.10.0`, the latest version.
+
 ## 1.1.2-alpha1
 
 Date: 2026-10-10
