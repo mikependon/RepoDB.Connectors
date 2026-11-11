@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>RepoDb.Connector.MariaDb</Title>
     <AssemblyName>RepoDb.Connector.MariaDb</AssemblyName>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net10.0;net11.0</TargetFrameworks>
     <Description>A connector for MariaDB used by RepoDB. This uses the MySql.Data library underneath.</Description>
     <Authors>mike_pendon</Authors>
     <LangVersion>preview</LangVersion>

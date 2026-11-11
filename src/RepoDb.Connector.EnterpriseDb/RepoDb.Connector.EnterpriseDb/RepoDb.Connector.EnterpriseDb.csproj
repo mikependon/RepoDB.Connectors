@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>RepoDb.Connector.EnterpriseDb</Title>
     <AssemblyName>RepoDb.Connector.EnterpriseDb</AssemblyName>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <Description>A connector for EnterpriseDB used by RepoDB. This uses the Npgsql library underneath.</Description>
     <Authors>mike_pendon</Authors>
     <LangVersion>preview</LangVersion>

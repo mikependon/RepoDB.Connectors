@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>RepoDb.Connector.AuroraDb.MySqlConnector</Title>
     <AssemblyName>RepoDb.Connector.AuroraDb.MySqlConnector</AssemblyName>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <Description>A connector for Amazon Aurora MySQL used by RepoDB. This uses the AWS Advanced .NET Data Provider Wrapper on top of the MySqlConnector library.</Description>
     <Authors>mike_pendon</Authors>
     <LangVersion>preview</LangVersion>
